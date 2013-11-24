@@ -75,30 +75,45 @@ namespace SortsLibrary
         {
             var mediana = (startIndex + endIndex) / 2;
             var medElement = originalArray[mediana];
+            originalArray.Swap(mediana, endIndex);
             var curLeft = startIndex;
-            var curRight = endIndex;
 
-            do
+            for (int i = startIndex; i < endIndex - 1; ++i)
             {
-                while (originalArray[curRight] > medElement && curRight > startIndex)
+                if (originalArray[i] <= medElement)
                 {
-                    curRight--;
-                }
-                while (originalArray[curLeft] < medElement && curLeft < endIndex)
-                {
+                    originalArray.Swap(i, curLeft);
                     curLeft++;
                 }
-                if (curLeft <= curRight)
-                {
-                    var temp = originalArray[curLeft];
-                    originalArray[curLeft] = originalArray[curRight];
-                    originalArray[curRight] = temp;
-                    curLeft++;
-                    curRight--;
-                }
-            } while (curLeft <= curRight);
+            }
+            originalArray.Swap(endIndex, curLeft);
+
+                //do
+                //{
+                //    while (originalArray[curRight] > medElement && curRight > startIndex)
+                //    {
+                //        curRight--;
+                //    }
+                //    while (originalArray[curLeft] < medElement && curLeft < endIndex)
+                //    {
+                //        curLeft++;
+                //    }
+                //    if (curLeft <= curRight)
+                //    {
+                //        originalArray.Swap(curLeft, curRight);
+                //        curLeft++;
+                //        curRight--;
+                //    }
+                //} while (curLeft <= curRight);
 
             return curLeft;
+        }
+
+        private static void Swap(this int[] a, int left, int right)
+        {
+            var temp = a[left];
+            a[left] = a[right];
+            a[right] = temp;
         }
     }
 }
