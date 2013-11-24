@@ -57,34 +57,48 @@ namespace SortsLibrary
 
         public static SortResult QuickInPlace(int[] originalArray)
         {
-            return GenerateResult(QuickInPlaceRec(originalArray, 0, originalArray.Length), DateTime.Now);
+            QuickInPlaceRec(originalArray, 0, originalArray.Length - 1);
+            return GenerateResult(originalArray, DateTime.Now);
         }
 
-        private static int[] QuickInPlaceRec(int[] originalArray, int start_ind, int end_ind)
+        private static void QuickInPlaceRec(int[] originalArray, int startIndex, int endIndex)
         {
-            //if (originalArray.Count < 2)
-                return originalArray;
+            if (startIndex < endIndex)
+            {
+                var splitIndex = Split(originalArray, startIndex, endIndex);
+                QuickInPlaceRec(originalArray, startIndex, splitIndex - 1);
+                QuickInPlaceRec(originalArray, splitIndex + 1, endIndex);
+            }
+        }
 
-            //int pivot = originalArray.Count / 2;
-            //int pivotElement = originalArray[pivot];
+        private static int Split(int[] originalArray, int startIndex, int endIndex)
+        {
+            var mediana = (startIndex + endIndex) / 2;
+            var medElement = originalArray[mediana];
+            var curLeft = startIndex;
+            var curRight = endIndex;
 
-            //var lessList = new List<int>(pivot);
-            //var greaterList = new List<int>(pivot);
-            //for (int i = 0; i < originalArray.Count; ++i)
-            //{
-            //    if (i == pivot) continue;
+            do
+            {
+                while (originalArray[curRight] > medElement && curRight > startIndex)
+                {
+                    curRight--;
+                }
+                while (originalArray[curLeft] < medElement && curLeft < endIndex)
+                {
+                    curLeft++;
+                }
+                if (curLeft <= curRight)
+                {
+                    var temp = originalArray[curLeft];
+                    originalArray[curLeft] = originalArray[curRight];
+                    originalArray[curRight] = temp;
+                    curLeft++;
+                    curRight--;
+                }
+            } while (curLeft <= curRight);
 
-            //    if (originalArray[i] <= pivotElement)
-            //        lessList.Add(originalArray[i]);
-            //    else if (originalArray[i] > pivotElement)
-            //        greaterList.Add(originalArray[i]);
-            //}
-
-            //List<int> resultSet = new List<int>(originalArray.Count);
-            //resultSet.AddRange(QuickRec(lessList));
-            //resultSet.Add(pivotElement);
-            //resultSet.AddRange(QuickRec(greaterList));
-            //return resultSet;
+            return curLeft;
         }
     }
 }

@@ -85,10 +85,28 @@ namespace SortsTests
         }
 
         [TestMethod]
+        public void SortRandomArraySeven()
+        {
+            var resultArray = new[] { 1, 2, 3, 4, 5, 6, 7 };
+            var originalArray = new[] { 6, 4, 2, 3, 7, 5, 1 };
+            var res = Sorts.QuickInPlace(originalArray);
+            Assert.IsTrue(CompareArrays(resultArray, res.SortedArray));
+        }
+
+        [TestMethod]
         public void SortArrayWithDuplicates()
         {
             var resultArray = new[] { 2, 3, 3, 4, 4, 6 };
             var originalArray = new[] { 6, 4, 2, 3, 4, 3 };
+            var res = Sorts.QuickInPlace(originalArray);
+            Assert.IsTrue(CompareArrays(resultArray, res.SortedArray));
+        }
+
+        [TestMethod]
+        public void SortArrayWithDuplicatesSeven()
+        {
+            var resultArray = new[] { 2, 3, 3, 4, 4, 6, 7};
+            var originalArray = new[] { 6, 4, 2, 7, 3, 4, 3 };
             var res = Sorts.QuickInPlace(originalArray);
             Assert.IsTrue(CompareArrays(resultArray, res.SortedArray));
         }
