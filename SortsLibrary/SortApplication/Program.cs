@@ -10,6 +10,17 @@ namespace SortApplication
     {
         static void Main(string[] args)
         {
+            var options = new CommandLineOptions();
+            if (args.Length > 0)
+            {
+                if (CommandLine.CommandLineParser.Default.ParseArguments(args, options))
+                {
+                }
+            }
+            else
+            {
+                options.GetUsage();
+            }
         }
     }
 }
