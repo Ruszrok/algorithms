@@ -5,6 +5,9 @@ using System.Text;
 using System.Threading.Tasks;
 using SortsLibrary;
 using System.IO;
+using System.Reflection;
+
+[assembly: AssemblyInformationalVersion("0.0.1.6")]
 
 namespace SortApplication
 {
@@ -52,19 +55,21 @@ namespace SortApplication
                     switch(sortType)
                     {
                         case SortType.Quick:
+                            Sorts.Quick(new int[]{ 1 }); //For loading assembly
                             result = Sorts.Quick(inArray);
                             break;
                         case SortType.Heap:
+                            Sorts.FiveHeap(new int[] { 1 }); //For loading assembly
                             result = Sorts.FiveHeap(inArray);
                             break;
                     }
                     WriteAnswerToFile(options.OutFileName, result.SortedArray);
-                    WriteTimeToFile(options.OutFileName, result.TimeSpentedForSort);
+                    WriteTimeToFile(options.TimeFileName, result.TimeSpentedForSort);
                 }
             }
             else
             {
-                options.GetUsage();
+                Console.WriteLine(options.GetUsage());
             }
         }
     }

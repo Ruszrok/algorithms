@@ -29,7 +29,7 @@ namespace SortApplication
         [Option("t", "timefile", Required = true, HelpText = "This is output for time file")]
         public string TimeFileName { get; set; }
 
-        [Option("s", "timefile", Required = true, HelpText = "Specify sort type. 1 - Quick, 2 - Heap.")]
+        [Option("s", "sort-type", Required = true, HelpText = "Specify sort type. 1 - Quick, 2 - Heap.")]
         public int SortType { get; set; }
 
         [HelpOption]
