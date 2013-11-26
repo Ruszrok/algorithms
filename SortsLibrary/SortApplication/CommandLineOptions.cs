@@ -8,6 +8,12 @@ using System.Threading.Tasks;
 
 namespace SortApplication
 {
+    enum SortType
+    {
+        Quick = 1,
+        Heap = 2
+    }
+
     class CommandLineOptions
     {
         public CommandLineOptions()
@@ -22,6 +28,9 @@ namespace SortApplication
 
         [Option("t", "timefile", Required = true, HelpText = "This is output for time file")]
         public string TimeFileName { get; set; }
+
+        [Option("s", "timefile", Required = true, HelpText = "Specify sort type. 1 - Quick, 2 - Heap.")]
+        public int SortType { get; set; }
 
         [HelpOption]
         public string GetUsage()
