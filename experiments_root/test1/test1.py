@@ -24,6 +24,7 @@ q_sort_command_format = path_to_sorter + " -i %s -o %s -t %s -s 1"
 h_sort_command_format = path_to_sorter + " -i %s -o %s -t %s -s 2"
 
 while(size <= max_size):
+	print size
 	for i in xrange(0, len(file_formats)):
 		cur_format = file_formats[i]
 
@@ -44,5 +45,4 @@ while(size <= max_size):
 		os.system(h_sort_command)
 		print gen_file_name, ' heap sort Completed'
 		print '==========================================='
-
 	size = size + step
