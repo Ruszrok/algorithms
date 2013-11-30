@@ -1,16 +1,16 @@
 import os;
 
-low = 1
-high = 1000000000
+low, high = 1, 1e9
 size = 1
-step = 10000
-max_size = 1000000 + 1;
+step = 1e4
+max_size = 1e6 + 1;
 #max_size = 10
 
 #gen_files_format
 default_file_name = "test"
 default_extension = "tst"
 time_extension = "time"
+
 random_files = "./random/%d/%s.%s"
 asc_files = "./asc/%d/%s.%s"
 desc_files = "./desc/%d/%s.%s"
