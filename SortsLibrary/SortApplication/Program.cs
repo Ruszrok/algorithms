@@ -19,7 +19,9 @@ namespace SortApplication
             using (var reader = new StreamReader(fileName))
             {
                 var size = Convert.ToInt32(reader.ReadLine());
-                result = reader.ReadLine().Split(' ').Select(s=>Convert.ToInt32(s)).ToArray();
+                result = reader.ReadLine()
+                        .Split(new[]{' '}, StringSplitOptions.RemoveEmptyEntries)
+                        .Select(s=>Convert.ToInt32(s)).ToArray();
             }
             return result;
         }
