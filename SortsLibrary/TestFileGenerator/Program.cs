@@ -19,7 +19,7 @@ namespace TestFileGenerator
             var generator = new Random(DateTime.Now.Millisecond);
             for (int i = 0; i < arraySize; i++)
             {
-                var nextValue = generator.Next(lowBound, highBound);
+                var nextValue = generator.Next(lowBound, highBound +1);
                 outFile.Write(String.Format(OutFileFormat, nextValue));
             }
         }
