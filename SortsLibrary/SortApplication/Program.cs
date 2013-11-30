@@ -57,8 +57,8 @@ namespace SortApplication
                     switch(sortType)
                     {
                         case SortType.Quick:
-                            Sorts.Quick(new int[]{ 1 }); //For loading assembly
-                            result = Sorts.Quick(inArray);
+                            Sorts.QuickInPlace(new int[]{ 1 }); //For loading assembly
+                            result = Sorts.QuickInPlace(inArray);
                             break;
                         case SortType.Heap:
                             Sorts.FiveHeap(new int[] { 1 }); //For loading assembly
