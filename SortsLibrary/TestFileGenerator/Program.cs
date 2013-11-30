@@ -24,6 +24,24 @@ namespace TestFileGenerator
             }
         }
 
+        static void AscArrayGeneration(StreamWriter outFile, int arraySize, int lowBound, int highBound)
+        {
+            for (int i = 0; i < arraySize; i++)
+            {
+                var nextValue = lowBound < highBound? lowBound++ : highBound;
+                outFile.Write(String.Format(OutFileFormat, nextValue));
+            }
+        }
+
+        static void DescArrayGeneration(StreamWriter outFile, int arraySize, int lowBound, int highBound)
+        {
+            for (int i = 0; i < arraySize; i++)
+            {
+                var nextValue = highBound > lowBound ? highBound-- : lowBound;
+                outFile.Write(String.Format(OutFileFormat, nextValue));
+            }
+        }
+
         static void Main(string[] args)
         {
             var options = new CommandLineOptions();
@@ -43,8 +61,10 @@ namespace TestFileGenerator
                                 RandomArrayGeneration(sw, options.ArraySize, options.LowElementBound, options.HighElementBound);
                                 break;
                             case ArrayOrder.Asc:
+                                AscArrayGeneration(sw, options.ArraySize, options.LowElementBound, options.HighElementBound);
                                 break;
                             case ArrayOrder.Desc:
+                                DescArrayGeneration(sw, options.ArraySize, options.LowElementBound, options.HighElementBound);
                                 break;
                         }
 
