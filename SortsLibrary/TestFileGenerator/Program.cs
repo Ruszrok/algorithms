@@ -2,8 +2,11 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+
+[assembly: AssemblyInformationalVersion("0.0.1.6")]
 
 namespace TestFileGenerator
 {
@@ -26,24 +29,27 @@ namespace TestFileGenerator
             var options = new CommandLineOptions();
             if (args.Length > 0)
             {
-                using (var fs = new FileStream(options.FileName, FileMode.Create))
-                using (var sw = new StreamWriter(new BufferedStream(fs)))
+                if (CommandLine.CommandLineParser.Default.ParseArguments(args, options))
                 {
-                    sw.WriteLine(options.ArraySize);
-                    var orderType = (ArrayOrder) options.OrderType;
-
-                    switch(orderType)
+                    using (var fs = new FileStream(options.FileName, FileMode.Create))
+                    using (var sw = new StreamWriter(new BufferedStream(fs)))
                     {
-                        case ArrayOrder.Random:
-                            RandomArrayGeneration(sw, options.ArraySize, options.LowElementBound, options.HighElementBound);
-                            break;
-                        case ArrayOrder.Asc:
-                            break;
-                        case ArrayOrder.Desc:
-                            break;
-                    }
+                        sw.WriteLine(options.ArraySize);
+                        var orderType = (ArrayOrder)options.OrderType;
 
-                    sw.Flush();
+                        switch (orderType)
+                        {
+                            case ArrayOrder.Random:
+                                RandomArrayGeneration(sw, options.ArraySize, options.LowElementBound, options.HighElementBound);
+                                break;
+                            case ArrayOrder.Asc:
+                                break;
+                            case ArrayOrder.Desc:
+                                break;
+                        }
+
+                        sw.Flush();
+                    }
                 }
             }
             else

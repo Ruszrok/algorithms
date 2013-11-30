@@ -33,7 +33,7 @@ namespace TestFileGenerator
         [Option("o", "order", DefaultValue=0, HelpText = "Specify out order array. 0 - Random, 1 - Asc, 2 - Desc.")]
         public int OrderType { get; set; }
 
-        [Option("f", "out-file-name", DefaultValue = 0, HelpText = "Specify out file name.")]
+        [Option("f", "out-file-name", Required = true, HelpText = "Specify out file name.")]
         public string FileName { get; set; }
 
         [HelpOption]
