@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,7 +11,11 @@ namespace SortsLibrary
     {
         public static SortResult FiveHeap(int[] originalArray)
         {
-            return GenerateResult(FiveHeapSrt(originalArray), DateTime.Now);
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            var result = FiveHeapSrt(originalArray);
+            stopwatch.Stop();
+            return GenerateResult(result, stopwatch.Elapsed);
         }
 
         private static int[] FiveHeapSrt(int[] array)

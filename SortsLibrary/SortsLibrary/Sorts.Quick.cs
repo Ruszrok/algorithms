@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,18 +15,22 @@ namespace SortsLibrary
 
     public static partial class Sorts
     {
-        private static SortResult GenerateResult(int[] array, DateTime startTime)
+        private static SortResult GenerateResult(int[] array, TimeSpan spentTime)
         {
             return new SortResult 
                     {
                         SortedArray = array,
-                        TimeSpentedForSort = (DateTime.Now - startTime) 
+                        TimeSpentedForSort = spentTime 
                     };
         }
 
         public static  SortResult Quick(int[] originalArray)
         {
-            return GenerateResult(QuickRec(originalArray.ToList()).ToArray(), DateTime.Now);
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
+            var result = QuickRec(originalArray.ToList()).ToArray();
+            stopwatch.Stop();
+            return GenerateResult(result, stopwatch.Elapsed);
         }
 
         private static List<int> QuickRec(List<int> originalArray)

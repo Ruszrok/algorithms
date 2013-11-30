@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,8 +12,11 @@ namespace SortsLibrary
 
         public static SortResult QuickInPlace(int[] originalArray)
         {
+            var stopwatch = new Stopwatch();
+            stopwatch.Start();
             QuickInPlaceRec(originalArray, 0, originalArray.Length - 1);
-            return GenerateResult(originalArray, DateTime.Now);
+            stopwatch.Stop();
+            return GenerateResult(originalArray, stopwatch.Elapsed);
         }
 
         private static void QuickInPlaceRec(int[] originalArray, int startIndex, int endIndex)
