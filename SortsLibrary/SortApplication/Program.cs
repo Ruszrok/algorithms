@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using SortsLibrary;
 using System.IO;
 using System.Reflection;
+using System.Threading;
 
 [assembly: AssemblyInformationalVersion("0.0.1.6")]
 
@@ -57,11 +58,11 @@ namespace SortApplication
                     switch(sortType)
                     {
                         case SortType.Quick:
-                            Sorts.QuickInPlace(new int[]{ 1 }); //For loading assembly
-                            result = Sorts.QuickInPlace(inArray);
+                            var thread = new Thread(() => { result = Sorts.QuickInPlace(inArray); }, 60000000);
+                            thread.Start();
+                            thread.Join();
                             break;
                         case SortType.Heap:
-                            Sorts.FiveHeap(new int[] { 1 }); //For loading assembly
                             result = Sorts.FiveHeap(inArray);
                             break;
                     }
