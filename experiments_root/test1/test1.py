@@ -15,10 +15,6 @@ random_files = "./random/%d/%s.%s"
 asc_files = "./asc/%d/%s.%s"
 desc_files = "./desc/%d/%s.%s"
 file_formats = [random_files, asc_files, desc_files]
-#generate_orders
-order_random = 0
-order_asc = 1
-order_desc = 2
 
 path_to_generator = '..\..\Bin\TestFileGenerator.exe'
 generate_command_fotmat = '%s -l %d -h %d' %(path_to_generator, low, high) +' -n %d -o %d -f %s'
@@ -27,7 +23,7 @@ path_to_sorter = '..\..\Bin\SortApplication.exe'
 q_sort_command_format = path_to_sorter + " -i %s -o %s -t %s -s 1"
 h_sort_command_format = path_to_sorter + " -i %s -o %s -t %s -s 2"
 
-while(size < max_size):
+while(size <= max_size):
 	for i in xrange(0, len(file_formats)):
 		cur_format = file_formats[i]
 
