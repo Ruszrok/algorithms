@@ -110,5 +110,14 @@ namespace SortsTests
             var res = Sorts.QuickInPlace(originalArray);
             Assert.IsTrue(CompareArrays(resultArray, res.SortedArray));
         }
+
+        [TestMethod]
+        public void SortBadArrayWithDuplicatesSeven()
+        {
+            var resultArray = new[] { 1, 1, 1, 1, 2, 2, 2 };
+            var originalArray = new[] { 1, 2, 1, 1, 2, 2, 1 };
+            var res = Sorts.QuickInPlace(originalArray);
+            Assert.IsTrue(CompareArrays(resultArray, res.SortedArray));
+        }
     }
 }

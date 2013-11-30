@@ -31,14 +31,15 @@ namespace SortsLibrary
 
         private static int Split(int[] originalArray, int startIndex, int endIndex)
         {
-            var mediana = (startIndex + endIndex) / 2;
-            var medElement = originalArray[mediana];
-            originalArray.Swap(mediana, endIndex);
+            var mediana = (endIndex - startIndex) / originalArray.Length;
+            var pivot = originalArray[endIndex] >= originalArray[mediana] ? endIndex: mediana;
+            var pivotElement = originalArray[pivot];
+            originalArray.Swap(pivot, endIndex);
             var curLeft = startIndex;
 
             for (int i = startIndex; i < endIndex; ++i)
             {
-                if (originalArray[i] <= medElement)
+                if (originalArray[i] <= pivotElement)
                 {
                     originalArray.Swap(i, curLeft);
                     curLeft++;
@@ -51,6 +52,8 @@ namespace SortsLibrary
 
         private static void Swap(this int[] a, int left, int right)
         {
+            if (left == right) return;
+
             var temp = a[left];
             a[left] = a[right];
             a[right] = temp;
