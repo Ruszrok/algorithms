@@ -49,6 +49,7 @@ namespace TestFileGenerator
             {
                 if (CommandLine.CommandLineParser.Default.ParseArguments(args, options))
                 {
+                    new FileInfo(options.FileName).Directory.Create();
                     using (var fs = new FileStream(options.FileName, FileMode.Create))
                     using (var sw = new StreamWriter(new BufferedStream(fs)))
                     {
