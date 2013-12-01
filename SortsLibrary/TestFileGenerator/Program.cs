@@ -26,20 +26,74 @@ namespace TestFileGenerator
 
         static void AscArrayGeneration(StreamWriter outFile, int arraySize, int lowBound, int highBound)
         {
-            for (int i = 0; i < arraySize; i++)
+            if (highBound > arraySize)
             {
-                var nextValue = lowBound < highBound? lowBound++ : highBound;
-                outFile.Write(String.Format(OutFileFormat, nextValue));
+                for (int i = 0; i < arraySize; i++)
+                {
+                    var nextValue = lowBound < highBound ? lowBound++ : highBound;
+                    outFile.Write(String.Format(OutFileFormat, nextValue));
+                }
+            }
+            else
+            {
+                var partitions = GeneratePartSizes(arraySize, lowBound, highBound);
+                var curPart = 0;
+                var lastSum = partitions[0];
+                for (int i = 0; i < arraySize; i++)
+                {
+                    if (i >= lastSum)
+                    {
+                        lastSum += partitions[curPart++];
+                    }
+                    var nextValue = lowBound + curPart;
+                    nextValue = nextValue > highBound ? highBound : nextValue;
+                    outFile.Write(String.Format(OutFileFormat, nextValue));
+                }
             }
         }
 
         static void DescArrayGeneration(StreamWriter outFile, int arraySize, int lowBound, int highBound)
         {
-            for (int i = 0; i < arraySize; i++)
+            if (highBound > arraySize)
             {
-                var nextValue = highBound > lowBound ? highBound-- : lowBound;
-                outFile.Write(String.Format(OutFileFormat, nextValue));
+                for (int i = 0; i < arraySize; i++)
+                {
+                    var nextValue = highBound > lowBound ? highBound-- : lowBound;
+                    outFile.Write(String.Format(OutFileFormat, nextValue));
+                }
             }
+            else
+            {
+                var partitions = GeneratePartSizes(arraySize, lowBound, highBound);
+                var curPart = 0;
+                var lastSum = partitions[0];
+                for (int i = 0; i < arraySize; i++)
+                {
+                    if (i >= lastSum)
+                    {
+                        lastSum += partitions[curPart++];
+                    }
+                    var nextValue = highBound - curPart;
+                    nextValue = nextValue < lowBound ? lowBound : nextValue;
+                    outFile.Write(String.Format(OutFileFormat, nextValue));
+                }
+            }
+        }
+
+        static int[] GeneratePartSizes(int arraySize, int lowBound, int highBound)
+        {
+            var partsCount = highBound - lowBound + 1;
+            var parts = new int[partsCount];
+            var generator = new Random(DateTime.Now.Millisecond);
+            var maxPartSize = arraySize;
+
+            for (int i = 0; i < partsCount - 1; i++)
+            {
+                parts[i] = generator.Next(0, maxPartSize);
+                maxPartSize -= parts[i];
+            }
+            parts[partsCount - 1] = maxPartSize;
+            return parts;
         }
 
         static void Main(string[] args)
