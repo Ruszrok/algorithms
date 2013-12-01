@@ -31,9 +31,9 @@ namespace SortsLibrary
 
         private static int Split(int[] originalArray, int startIndex, int endIndex)
         {
-            var mediana = (endIndex - startIndex) / originalArray.Length;
-            var pivot = originalArray[endIndex] >= originalArray[mediana] ? endIndex: mediana;
+            var pivot = (endIndex + startIndex) / 2;
             var pivotElement = originalArray[pivot];
+
             originalArray.Swap(pivot, endIndex);
             var curLeft = startIndex;
 
