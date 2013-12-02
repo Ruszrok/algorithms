@@ -84,12 +84,12 @@ namespace TestFileGenerator
         {
             var partsCount = highBound - lowBound + 1;
             var parts = new int[partsCount];
-            var generator = new Random(DateTime.Now.Millisecond);
+            //var generator = new Random(DateTime.Now.Millisecond);
             var maxPartSize = arraySize;
 
             for (int i = 0; i < partsCount - 1; i++)
             {
-                parts[i] = generator.Next(0, maxPartSize);
+                parts[i] = arraySize / partsCount;
                 maxPartSize -= parts[i];
             }
             parts[partsCount - 1] = maxPartSize;
