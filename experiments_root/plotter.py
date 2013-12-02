@@ -17,11 +17,11 @@ def get_q_h_data(base_folder, q_time_file, h_time_file):
 				h.append(float(f.readline().strip()))
 	return q, h
 
-def csv_output(csv_file_format, base_folder, q_times, h_times):
+def csv_output(csv_file_format, base_folder, data_list):
 	csv_file_name = csv_file_format % base_folder
 	with open(csv_file_name, 'w') as f:
-				f.write(','.join(map(str, q_times)) + '\n')
-				f.write(','.join(map(str, h_times)) + '\n')
+		for data in data_list:
+			f.write(','.join(map(str, data)) + '\n')
 
 
 
@@ -49,9 +49,10 @@ else:
 	desc_folders_path = os.path.join(experiment_folder, desc_folder)
 	q_desc_times, h_desc_times = get_q_h_data(desc_folders_path, q_time_file, h_time_file)
 
-	csv_output(csv_file_format, random_folder, q_random_times, h_random_times)
-	csv_output(csv_file_format, asc_folder, q_asc_times, h_asc_times)
-	csv_output(csv_file_format, desc_folder, q_desc_times, h_desc_times)
+	csv_output(csv_file_format, random_folder, [q_random_times, h_random_times])
+	csv_output(csv_file_format, asc_folder, [q_asc_times, h_asc_times])
+	csv_output(csv_file_format, desc_folder, [q_desc_times, h_desc_times])
+	csv_output(csv_file_format, 'all', [q_random_times, q_asc_times, q_desc_times, h_random_times, h_asc_times, h_desc_times])
 	# plt.plot(q_random_times, c='b', title='Quicksort with random array')
 	# plt.plot(q_asc_times, c='b', title='Quicksort with asc array')
 	# plt.plot(q_asc_times, c='b', title='Quicksort with desc array')
